@@ -1,4 +1,4 @@
-package sfgpetclinic.model;
+package com.alsinteligence.sfgpetclinic.model;
 
 public class PetType {
 
