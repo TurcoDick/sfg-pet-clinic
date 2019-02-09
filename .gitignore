@@ -23,3 +23,10 @@
 /nbdist/
 /.nb-gradle/
 /build/
+
+
+### Não quero quem mande essas aqui tbm ###
+pom.xml.releaseBackup
+release.properties
+pet-clinic-web/pom.xml.releaseBackup
+pet-clinic-data/pom.xml.releaseBackup
