@@ -1,14 +1,13 @@
 package com.alsinteligence.sfgpetclinic.services.map;
 
-import com.alsinteligence.sfgpetclinic.model.Pet;
-import com.alsinteligence.sfgpetclinic.services.PetService;
+import com.alsinteligence.sfgpetclinic.model.Vet;
+import com.alsinteligence.sfgpetclinic.services.VetService;
 
 import java.util.Set;
 
-public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService{
-
+public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
     @Override
-    public Set<Pet> findAll() {
+    public Set<Vet> findAll() {
         return super.findAll();
     }
 
@@ -18,17 +17,17 @@ public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetS
     }
 
     @Override
-    public void delete(Pet object) {
+    public void delete(Vet object) {
         super.delete(object);
     }
 
     @Override
-    public Pet save(Pet object) {
+    public Vet save(Vet object) {
         return super.save(object.getId(), object);
     }
 
     @Override
-    public Pet findById(Long id) {
+    public Vet findById(Long id) {
         return super.findById(id);
     }
 }
