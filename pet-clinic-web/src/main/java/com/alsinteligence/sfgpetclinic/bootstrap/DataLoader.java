@@ -22,28 +22,44 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        forDataLoad(5);
+        forDataLoad();
 
     }
 
-    public void forDataLoad(int count){
-        int i;
-        for(i = 0; i < count; i++){
-            Owner owner = new Owner();
-            owner.setId(1L);
-            owner.setFisrtName("Alison "+ "indice "+i);
-            owner.setLasName("Lucio" + "indice " + i);
-            ownerService.save(owner);
+    public void forDataLoad(){
 
-            System.out.println("Loaded Owner.....");
+        Owner owner = new Owner();
+        owner.setId(1L);
+        owner.setFirstName("Alison ");
+        owner.setLasName("Lucio");
+        ownerService.save(owner);
 
-            Vet vet = new Vet();
-            vet.setId(1L);
-            vet.setFisrtName("vetAlison "+i);
-            vet.setLasName("vetLucio" +i);
+        System.out.println("Loaded Owner.....");
 
-            System.out.println("Loaded Vet.....");
+        Vet vet = new Vet();
+        vet.setId(1L);
+        vet.setFirstName("Dick");
+        vet.setLasName("Dogão");
+        vetService.save(vet);
 
-        }
+        System.out.println("Loaded Vet.....");
+
+        Owner owner2 = new Owner();
+        owner2.setId(2L);
+        owner2.setFirstName("Fernanda ");
+        owner2.setLasName("Bueno");
+        ownerService.save(owner2);
+
+        System.out.println("Loaded Owner.....");
+
+        Vet vet2 = new Vet();
+        vet2.setId(2L);
+        vet2.setFirstName("Jadi");
+        vet2.setLasName("Pit");
+        vetService.save(vet2);
+
+        System.out.println("Loaded Vet.....");
+
+
     }
 }

@@ -2,15 +2,15 @@ package com.alsinteligence.sfgpetclinic.model;
 
 public class Person extends BaseEntity{
 
-    private String fisrtName;
+    private String firstName;
     private String lasName;
 
-    public String getFisrtName() {
-        return fisrtName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFisrtName(String fisrtName) {
-        this.fisrtName = fisrtName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLasName() {
