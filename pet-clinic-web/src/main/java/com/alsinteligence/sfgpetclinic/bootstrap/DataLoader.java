@@ -1,6 +1,7 @@
 package com.alsinteligence.sfgpetclinic.bootstrap;
 
 import com.alsinteligence.sfgpetclinic.model.Owner;
+import com.alsinteligence.sfgpetclinic.model.Pet;
 import com.alsinteligence.sfgpetclinic.model.PetType;
 import com.alsinteligence.sfgpetclinic.model.Vet;
 import com.alsinteligence.sfgpetclinic.services.OwnerService;
@@ -8,6 +9,8 @@ import com.alsinteligence.sfgpetclinic.services.PetTypeService;
 import com.alsinteligence.sfgpetclinic.services.VetService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 
 
 @Component
@@ -26,6 +29,14 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+
+
+        forDataLoad();
+
+    }
+
+    public void forDataLoad(){
+
         PetType dog = new PetType();
         dog.setName("Dog");
         PetType savedDogPetType = petTypeService.save(dog);
@@ -34,18 +45,23 @@ public class DataLoader implements CommandLineRunner {
         dog.setName("Cat");
         PetType savedCatPetType = petTypeService.save(dog);
 
-        forDataLoad();
-
-    }
-
-    public void forDataLoad(){
-
         Owner owner = new Owner();
         owner.setFirstName("Alison ");
         owner.setLasName("Lucio");
+        owner.setAddress("Rua Davos 193");
+        owner.setCity("Campos do Jordão");
+        owner.setTelephone("1236623384");
         ownerService.save(owner);
 
         System.out.println("Loaded Owner.....");
+
+        Pet mikesPet = new Pet();
+        mikesPet.setPetType(savedDogPetType);
+        mikesPet.setOwner(owner);
+        mikesPet.setBirthDate(LocalDate.now());
+        mikesPet.setName("Dick");
+
+        owner.getPets().add(mikesPet);
 
         Vet vet = new Vet();
         vet.setFirstName("Dick");
@@ -57,7 +73,18 @@ public class DataLoader implements CommandLineRunner {
         Owner owner2 = new Owner();
         owner2.setFirstName("Fernanda ");
         owner2.setLasName("Bueno");
+        owner2.setAddress("Rua Davos 197");
+        owner2.setCity("Campos do Jordão");
+        owner2.setTelephone("1236623484");
         ownerService.save(owner2);
+
+        Pet ferPet = new Pet();
+        ferPet.setPetType(savedCatPetType);
+        ferPet.setOwner(owner2);
+        ferPet.setBirthDate(LocalDate.now());
+        ferPet.setName("Bichano");
+
+        owner2.getPets().add(ferPet);
 
         System.out.println("Loaded Owner.....");
 
