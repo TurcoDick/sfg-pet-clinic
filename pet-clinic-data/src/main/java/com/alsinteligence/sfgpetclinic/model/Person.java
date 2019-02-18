@@ -1,9 +1,17 @@
 package com.alsinteligence.sfgpetclinic.model;
 
+
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public class Person extends BaseEntity{
 
+    @Column(name = "first_name")
     private String firstName;
-    private String lasName;
+
+    @Column(name = "last_name")
+    private String lastName;
 
     public String getFirstName() {
         return firstName;
@@ -13,11 +21,11 @@ public class Person extends BaseEntity{
         this.firstName = firstName;
     }
 
-    public String getLasName() {
-        return lasName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLasName(String lasName) {
-        this.lasName = lasName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }
