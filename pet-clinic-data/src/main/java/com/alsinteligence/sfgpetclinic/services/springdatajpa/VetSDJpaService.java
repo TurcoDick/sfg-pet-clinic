@@ -3,10 +3,14 @@ package com.alsinteligence.sfgpetclinic.services.springdatajpa;
 import com.alsinteligence.sfgpetclinic.model.Vet;
 import com.alsinteligence.sfgpetclinic.repositories.VetRepository;
 import com.alsinteligence.sfgpetclinic.services.VetService;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Service
+@Profile("springdatajpa")
 public class VetSDJpaService implements VetService {
 
     private final VetRepository vetRepository;
