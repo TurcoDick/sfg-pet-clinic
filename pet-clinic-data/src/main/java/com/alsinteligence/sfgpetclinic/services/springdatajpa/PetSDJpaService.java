@@ -20,11 +20,6 @@ public class PetSDJpaService implements PetService {
     }
 
     @Override
-    public Pet findByName(String name) {
-        return petRepository.findByName(name);
-    }
-
-    @Override
     public Set<Pet> findAll() {
         Set<Pet> pets = new HashSet<>();
         petRepository.findAll().forEach(pets::add);
