@@ -3,7 +3,6 @@ package com.alsinteligence.sfgpetclinic.bootstrap;
 import com.alsinteligence.sfgpetclinic.model.*;
 import com.alsinteligence.sfgpetclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -60,65 +59,58 @@ public class DataLoader implements CommandLineRunner {
         dentistry.setDescription("dentistry");
         Speciality savedDentistry = specialtiesService.save(dentistry);
 
-        Owner ownerAlison = new Owner();
-        ownerAlison.setFirstName("Alison ");
-        ownerAlison.setLastName("Lucio");
-        ownerAlison.setAddress("Rua Davos 193");
-        ownerAlison.setCity("Campos do Jordão");
-        ownerAlison.setTelephone("1236623384");
-        ownerService.save(ownerAlison);
+        Owner owner1 = new Owner();
+        owner1.setFirstName("Michael");
+        owner1.setLastName("Weston");
+        owner1.setAddress("123 Brickerel");
+        owner1.setCity("Miami");
+        owner1.setTelephone("1231231234");
 
-        System.out.println("Loaded Owner.....");
+        Pet mikesPet = new Pet();
+        mikesPet.setPetType(savedDogPetType);
+        mikesPet.setOwner(owner1);
+        mikesPet.setBirthDate(LocalDate.now());
+        mikesPet.setName("Rosco");
+        owner1.getPets().add(mikesPet);
 
-        Pet dogAlison = new Pet();
-        dogAlison.setPetType(savedDogPetType);
-        dogAlison.setOwner(ownerAlison);
-        dogAlison.setBirthDate(LocalDate.now());
-        dogAlison.setName("Dick");
+        ownerService.save(owner1);
 
-        ownerAlison.getPets().add(dogAlison);
+        Owner owner2 = new Owner();
+        owner2.setFirstName("Fiona");
+        owner2.setLastName("Glenanne");
+        owner2.setAddress("123 Brickerel");
+        owner2.setCity("Miami");
+        owner2.setTelephone("1231231234");
 
-        Vet vet = new Vet();
-        vet.setFirstName("Dr Francisco");
-        vet.setLastName("Gente boa");
-        vetService.save(vet);
-        vet.getSpecialities().add(savedDentistry);
+        Pet fionasCat = new Pet();
+        fionasCat.setName("Just Cat");
+        fionasCat.setOwner(owner2);
+        fionasCat.setBirthDate(LocalDate.now());
+        fionasCat.setPetType(savedCatPetType);
+        owner2.getPets().add(fionasCat);
 
-        System.out.println("Loaded Vet.....");
+        ownerService.save(owner2);
 
-        Owner ownerfernanda = new Owner();
-        ownerfernanda.setFirstName("Fernanda ");
-        ownerfernanda.setLastName("Bueno");
-        ownerfernanda.setAddress("Rua Davos 197");
-        ownerfernanda.setCity("Campos do Jordão");
-        ownerfernanda.setTelephone("1236623484");
-        ownerService.save(ownerfernanda);
+        Visit catVisit = new Visit();
+        catVisit.setPet(fionasCat);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Sneezy Kitty");
+        visitService.save(catVisit);
 
-        Visit dogVisit = new Visit();
-        dogVisit.setPet(dogAlison);
-        dogVisit.setDate(LocalDate.now());
-        dogVisit.setDescription("Dog sleeping");
-        visitService.save(dogVisit);
+        System.out.println("Loaded Owners....");
 
-        Pet ferPet = new Pet();
-        ferPet.setPetType(savedCatPetType);
-        ferPet.setOwner(ownerfernanda);
-        ferPet.setBirthDate(LocalDate.now());
-        ferPet.setName("Bichano");
-
-        ownerfernanda.getPets().add(ferPet);
-
-        System.out.println("Loaded Owner.....");
+        Vet vet1 = new Vet();
+        vet1.setFirstName("Sam");
+        vet1.setLastName("Axe");
+        vet1.getSpecialities().add(savedRadiology);
+        vetService.save(vet1);
 
         Vet vet2 = new Vet();
-        vet2.setFirstName("Dr Maria");
-        vet2.setLastName("Ana");
-        vet2.getSpecialities().add(savedRadiology);
+        vet2.setFirstName("Jessie");
+        vet2.setLastName("Porter");
         vet2.getSpecialities().add(savedSurgery);
         vetService.save(vet2);
 
-        System.out.println("Loaded Vet.....");
-
-
+        System.out.println("Loaded Vets....");
     }
 }
