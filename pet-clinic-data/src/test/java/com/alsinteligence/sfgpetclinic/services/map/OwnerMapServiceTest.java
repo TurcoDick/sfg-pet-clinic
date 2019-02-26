@@ -40,8 +40,8 @@ class OwnerMapServiceTest {
     Owner ownerSave = new Owner(3L,"Camila","Juan", "Rua Venesa",
             "Campos do Jordão","36625586",new HashSet<Pet>());
 
-    Pet pet1 = new Pet("Dick",petTypeDog,owner1, new HashSet<Visit>());
-    Pet pet2 = new Pet("Jade",petTypeDog,owner2, new HashSet<Visit>());
+    Pet pet1 = new Pet(1L,"Dick",petTypeDog,owner1, new HashSet<Visit>());
+    Pet pet2 = new Pet(2L,"Jade",petTypeDog,owner2, new HashSet<Visit>());
 
     Set<Owner> returnOwnersSet = new HashSet<>();
 
@@ -53,7 +53,6 @@ class OwnerMapServiceTest {
         owner2.getPets().add(pet2);
         returnOwnersSet.add(owner1);
         returnOwnersSet.add(owner2);
-
     }
 
     @Test

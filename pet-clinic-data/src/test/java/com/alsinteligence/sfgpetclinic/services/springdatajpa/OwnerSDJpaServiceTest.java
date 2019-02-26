@@ -4,7 +4,6 @@ import com.alsinteligence.sfgpetclinic.model.Owner;
 import com.alsinteligence.sfgpetclinic.model.Pet;
 import com.alsinteligence.sfgpetclinic.model.PetType;
 import com.alsinteligence.sfgpetclinic.model.Visit;
-import com.alsinteligence.sfgpetclinic.repositories.OwnerRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,21 +26,16 @@ class OwnerSDJpaServiceTest {
     public static final String LAST_NAME_ALISON = "Lucio";
 
     @Mock
-    OwnerRepository ownerRepository;
-
-    @Mock
     OwnerSDJpaService service;
 
     Set<Pet> pets = new HashSet<>();
     PetType petTypeDog = new PetType("Dog");
-    Owner owner1 = new Owner(1L,"Alison", "Lucio","Rua Davos","Campos do Jordão","36623384", new HashSet<Pet>());
-    Owner owner2 = new Owner(2L,"Fernanda", "Montero","Rua Davos","Campos do Jordão","36623384", new HashSet<Pet>());
-    Pet pet1 = new Pet("Dick",petTypeDog,owner1, new HashSet<Visit>());
-    Pet pet2 = new Pet("Jade",petTypeDog,owner2, new HashSet<Visit>());
+    Owner owner1 = new Owner(1L,"Alison", "Lucio","Rua Davos","Campos do Jordão","36623989", new HashSet<Pet>());
+    Owner owner2 = new Owner(2L,"Fernanda", "Montero","Rua Davos","Campos do Jordão","36623989", new HashSet<Pet>());
+    Pet pet1 = new Pet(1L, "Dick",petTypeDog,owner1, new HashSet<Visit>());
+    Pet pet2 = new Pet(2L, "Jade",petTypeDog,owner2, new HashSet<Visit>());
 
     Set<Owner> returnOwnersSet = new HashSet<>();
-
-
 
     @BeforeEach
     void setUp() {
