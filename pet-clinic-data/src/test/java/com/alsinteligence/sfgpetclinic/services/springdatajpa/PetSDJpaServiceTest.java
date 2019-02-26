@@ -80,6 +80,7 @@ class PetSDJpaServiceTest {
         assertEquals(FIRST_NAME, pet.getOwner().getFirstName());
     }
 
+
     @Test
     void delete() {
         petService.delete(pet1);
