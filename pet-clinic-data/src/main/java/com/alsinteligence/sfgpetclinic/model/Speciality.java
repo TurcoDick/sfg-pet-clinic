@@ -19,6 +19,11 @@ public class Speciality extends BaseEntity{
         this.description = description;
     }
 
+    public Speciality(Long id, String description) {
+        super.setId(id);
+        this.description = description;
+    }
+
     public String getDescription() {
         return description;
     }
