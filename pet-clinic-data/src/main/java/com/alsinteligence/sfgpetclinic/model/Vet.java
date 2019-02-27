@@ -20,6 +20,11 @@ public class Vet extends Person{
         this.specialities = specialities;
     }
 
+    public Vet(Long id, Set<Speciality> specialities) {
+        super.setId(id);
+        this.specialities = specialities;
+    }
+
     public Vet(String firstName, String lastName, Set<Speciality> specialities) {
         super(firstName, lastName);
         this.specialities = specialities;
