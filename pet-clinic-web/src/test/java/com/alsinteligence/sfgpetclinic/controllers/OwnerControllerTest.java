@@ -65,7 +65,7 @@ class OwnerControllerTest {
     void listOwnersByIndex() throws Exception{
         when(service.findAll()).thenReturn(ownerSet);
 
-        mockMvc.perform(get("/owners/index"))
+        mockMvc.perform(get("/owners/owners"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("owners/index"))
                 .andExpect(model().attribute("owners", hasSize(2)));
@@ -75,7 +75,7 @@ class OwnerControllerTest {
     void listOwnersByIndexHtml() throws Exception{
         when(service.findAll()).thenReturn(ownerSet);
 
-        mockMvc.perform(get("/owners/index.html"))
+        mockMvc.perform(get("/owners/owners.html"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("owners/index"))
                 .andExpect(model().attribute("owners", hasSize(2)));
