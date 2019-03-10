@@ -1,6 +1,7 @@
 package com.alsinteligence.sfgpetclinic.controllers;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,6 +28,7 @@ class IndexControllerTest {
                 .build();
     }
 
+    @DisplayName("Test proper view name is returned for index page")
     @Test
     void index() throws Exception {
         mockMvc.perform(get(""))
