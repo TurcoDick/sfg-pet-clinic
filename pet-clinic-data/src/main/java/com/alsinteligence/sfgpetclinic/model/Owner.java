@@ -24,6 +24,12 @@ public class Owner extends Person {
     public Owner() {
     }
 
+    public Owner(Long id, String firtName, String lastName) {
+        this.setId(id);
+        super.setFirstName(firtName);
+        super.setLastName(lastName);
+    }
+
     public Owner(Long id, String firtName, String lastName, String address, String city, String telephone, Set<Pet> pets) {
         this.setId(id);
         super.setFirstName(firtName);
