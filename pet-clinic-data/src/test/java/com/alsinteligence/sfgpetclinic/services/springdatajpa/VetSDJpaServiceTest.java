@@ -2,17 +2,21 @@ package com.alsinteligence.sfgpetclinic.services.springdatajpa;
 
 import com.alsinteligence.sfgpetclinic.model.Speciality;
 import com.alsinteligence.sfgpetclinic.model.Vet;
+import com.alsinteligence.sfgpetclinic.repositories.VetRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -20,19 +24,32 @@ class VetSDJpaServiceTest {
 
     private static final String DESCRITION_RADIOLOGISTIC = "Radiologic";
     private static final String DESCRITION_CIRURGIC = "Cirurgic";
-    Set<Vet> vetSet = new HashSet<>();
-    Set<Speciality> specialities = new HashSet<>();
-    Speciality specialityRadiologic = new Speciality(1L, DESCRITION_RADIOLOGISTIC);
-    Speciality specialityCirurgic = new Speciality(2L, DESCRITION_CIRURGIC);
 
-    Vet vetCamila = new Vet(1L,specialities);
-    Vet vetRoberto = new Vet(2L, specialities);
+    Set<Vet> vetSet;
+    Set<Speciality> specialities;
+    Speciality specialityRadiologic;
+    Speciality specialityCirurgic;
+
+    Vet vetCamila;
+    Vet vetRoberto;
 
     @Mock
+    VetRepository vetRepository;
+
+    @InjectMocks
     VetSDJpaService service;
 
     @BeforeEach
     void setUp() {
+
+        vetSet = new HashSet<>();
+        specialities = new HashSet<>();
+        specialityRadiologic = new Speciality(1L, DESCRITION_RADIOLOGISTIC);
+        specialityCirurgic = new Speciality(2L, DESCRITION_CIRURGIC);
+
+        vetCamila = new Vet(1L,specialities);
+        vetRoberto = new Vet(2L, specialities);
+
         specialities.add(specialityCirurgic);
         specialities.add(specialityRadiologic);
         vetSet.add(vetCamila);
@@ -48,7 +65,7 @@ class VetSDJpaServiceTest {
 
     @Test
     void findById() {
-        when(service.findById(1L)).thenReturn(vetCamila);
+        when(vetRepository.findById(1L)).thenReturn(Optional.of(vetCamila));
         Vet vet = service.findById(vetCamila.getId());
         assertEquals(vetCamila.getId(), vet.getId());
     }
@@ -62,13 +79,13 @@ class VetSDJpaServiceTest {
 
     @Test
     void delete() {
-        service.delete(vetRoberto);
-        Mockito.verify(service).delete(vetRoberto);
+        service.delete(new Vet());
+        verify(vetRepository).delete(any(Vet.class));
     }
 
     @Test
     void deleteById() {
         service.deleteById(vetCamila.getId());
-        Mockito.verify(service).deleteById(vetCamila.getId());
+        verify(vetRepository).deleteById(vetCamila.getId());
     }
 }

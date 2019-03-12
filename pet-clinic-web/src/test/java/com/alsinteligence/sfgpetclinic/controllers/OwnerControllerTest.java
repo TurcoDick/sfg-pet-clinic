@@ -34,14 +34,19 @@ class OwnerControllerTest {
 
     MockMvc mockMvc;
 
-    Owner ownerFernanda = new Owner(1L,"Fernanda","Dantas","Rua Venesa",
-            "Campinas","345555555",new HashSet<Pet>());
+    Owner ownerFernanda;
 
-    Owner ownerPaula = new Owner(2L,"Paula","Dantas","Rua Venesa",
-            "Campinas", "345555555",new HashSet<Pet>());
+    Owner ownerPaula;
 
     @BeforeEach
     void setUp() {
+
+        ownerFernanda = new Owner(1L,"Fernanda","Dantas","Rua Venesa",
+                "Campinas","345555555",new HashSet<Pet>());
+
+        ownerPaula = new Owner(2L,"Paula","Dantas","Rua Venesa",
+                "Campinas", "345555555",new HashSet<Pet>());
+
         ownerSet = new HashSet<>();
         ownerSet.add(ownerPaula);
         ownerSet.add(ownerFernanda);

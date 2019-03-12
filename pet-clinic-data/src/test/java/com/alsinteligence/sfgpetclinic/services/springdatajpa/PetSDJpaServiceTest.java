@@ -4,19 +4,21 @@ import com.alsinteligence.sfgpetclinic.model.Owner;
 import com.alsinteligence.sfgpetclinic.model.Pet;
 import com.alsinteligence.sfgpetclinic.model.PetType;
 import com.alsinteligence.sfgpetclinic.model.Visit;
-import com.alsinteligence.sfgpetclinic.services.PetService;
+import com.alsinteligence.sfgpetclinic.repositories.PetRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -34,41 +36,45 @@ class PetSDJpaServiceTest {
     private static final String TELEPHONE = "36623989";
 
     @Mock
-    PetService petService;
+    PetRepository petRepository;
 
-    Set<Pet> pets = new HashSet<>();
+    @InjectMocks
+    PetSDJpaService petService;
 
-
-
-    Pet pet1 = new Pet(ID_1, NAME_PET_1,
-            new PetType(PET_TYPE),
-            new Owner(1L, FIRST_NAME, LAST_NAME, ADDRESS,
-                    CITY, TELEPHONE, new HashSet<Pet>()),
-            new HashSet<Visit>());
-
-    Pet pet2 = new Pet(ID_2, NAME_PET_2,
-            new PetType(PET_TYPE),
-            new Owner(1L, FIRST_NAME, LAST_NAME, ADDRESS,
-                    CITY, TELEPHONE, new HashSet<Pet>()),
-            new HashSet<Visit>());
+    Set<Pet> pets;
+    Pet pet1, pet2;
 
 
     @BeforeEach
     void setUp() {
+        pets = new HashSet<>();
+
+        pet1 = new Pet(ID_1, NAME_PET_1,
+                new PetType(PET_TYPE),
+                new Owner(1L, FIRST_NAME, LAST_NAME, ADDRESS,
+                        CITY, TELEPHONE, new HashSet<Pet>()),
+                new HashSet<Visit>());
+
+        pet2 = new Pet(ID_2, NAME_PET_2,
+                new PetType(PET_TYPE),
+                new Owner(1L, FIRST_NAME, LAST_NAME, ADDRESS,
+                        CITY, TELEPHONE, new HashSet<Pet>()),
+                new HashSet<Visit>());
+
         pets.add(pet1);
         pets.add(pet2);
     }
 
     @Test
     void findAll() {
-        when(petService.findAll()).thenReturn(pets);
+        when(petRepository.findAll()).thenReturn(pets);
         Set<Pet> petSet = petService.findAll();
         assertEquals(2, petSet.size());
     }
 
     @Test
     void findById() {
-        when(petService.findById(ID_1)).thenReturn(pet1);
+        when(petRepository.findById(ID_1)).thenReturn(Optional.of(pet1));
         Pet pet = petService.findById(ID_1);
         assertEquals(FIRST_NAME,pet.getOwner().getFirstName());
     }
@@ -83,13 +89,13 @@ class PetSDJpaServiceTest {
 
     @Test
     void delete() {
-        petService.delete(pet1);
-        Mockito.verify(petService).delete(any());
+        petService.delete(new Pet());
+        verify(petRepository).delete(any(Pet.class));
     }
 
     @Test
     void deleteById() {
         petService.deleteById(ID_2);
-        Mockito.verify(petService).deleteById(any());
+        verify(petRepository).deleteById(any());
     }
 }

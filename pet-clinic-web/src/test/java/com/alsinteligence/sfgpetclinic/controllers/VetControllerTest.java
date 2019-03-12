@@ -32,13 +32,18 @@ class VetControllerTest {
 
     MockMvc mockMvc;
 
-    Set<Vet> vetSet = new HashSet<>();
+    Set<Vet> vetSet;
 
-    Vet vet1 = new Vet(new HashSet<Speciality>());
-    Vet vet2 = new Vet(new HashSet<Speciality>());
+    Vet vet1;
+    Vet vet2;
 
     @BeforeEach
     void setUp() {
+
+        vetSet = new HashSet<>();
+
+        vet1 = new Vet(new HashSet<Speciality>());
+        vet2 = new Vet(new HashSet<Speciality>());
 
         vetSet.add(vet1);
         vetSet.add(vet2);
